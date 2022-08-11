@@ -25,6 +25,7 @@ exports.getAllItems = async (req, res) => {
         });
     }catch(error){res.json(error)}   
 }
+
 /**
  * ### Description 
  * Deleting items from list
