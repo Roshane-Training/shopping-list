@@ -41,8 +41,8 @@ exports.createItem = async (req,res) => {
  */
 exports.deleteItemsById = async (req,res) => {
     try{
-        const item = await Items.findById({_id:req.params.id})
-        await Items.findbyIdAndDelete({_id:req.params.id})
+        const item = await Items.findById(req.params.id)
+        await Items.findByIdAndDelete(req.params.id)
         res.status(200).json({
             status: 'success',
             data: {
@@ -50,6 +50,6 @@ exports.deleteItemsById = async (req,res) => {
             }
         });
     }catch(error){
-        res.json(error)
+        res.json({error: error})
     }
 }
