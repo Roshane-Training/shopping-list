@@ -1,5 +1,27 @@
 const Items = require('../models/items.model');
 
+
+/**
+ * ### Description 
+ * Get all items 
+ */
+ exports.getAllItems = async (req, res) => {
+    try{
+        const items = await Items.find();
+        res.status(200).json({
+            status: 'success',
+            results: items.length,
+            data: {
+              items
+            }
+        });
+    }catch(error){res.json(error)}   
+}
+
+/**
+ * ### Description 
+ * Creating an item
+ */
 exports.createItem = async (req,res) => {
     try{
         const items = await Items.create(req.body);
@@ -13,18 +35,6 @@ exports.createItem = async (req,res) => {
     }catch(error){res.json(error)}
 }
 
-exports.getAllItems = async (req, res) => {
-    try{
-        const items = await Items.find();
-        res.status(200).json({
-            status: 'success',
-            results: items.length,
-            data: {
-              items
-            }
-        });
-    }catch(error){res.json(error)}   
-}
 /**
  * ### Description 
  * Deleting items from list
