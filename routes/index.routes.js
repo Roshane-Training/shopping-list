@@ -4,4 +4,14 @@ const IndexController = require('../controllers/index.controller')
 
 router.route('/').get(IndexController.index)
 
-module.exports = router
+router.route('/shopping_list')
+.post()
+.get();
+
+router.route('/shopping_list/:id')
+.delete();
+
+router.route('/categories')
+.get();
+
+module.exports = router;
