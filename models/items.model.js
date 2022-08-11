@@ -1,4 +1,4 @@
-const db = require("../db.js")
+const db = require("../app")
 
 let itemsSchema = new db.Schema({
    category_id: {type: db.Types.ObjectId, required: true, ref: "categories"},
