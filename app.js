@@ -26,5 +26,3 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err) => {
 		console.log(`Server listening on http://localhost:${PORT}`)
 	})
 })
-
-module.exports = mongoose;

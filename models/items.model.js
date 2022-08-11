@@ -1,4 +1,4 @@
-const db = require("../app")
+const db = require("mongoose")
 
 let itemsSchema = new db.Schema({
    category: {type: String, required: true},
