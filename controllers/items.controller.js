@@ -1,6 +1,6 @@
-const Items = require('');
+const Items = require('../models/items.model');
 
-exports.createitem = async (req,res) => {
+exports.createItem = async (req,res) => {
     try{
         const items = await Items.create(req.body);
         res.status(200).json({
