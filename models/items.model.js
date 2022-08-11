@@ -1,7 +1,7 @@
 const db = require("../app")
 
 let itemsSchema = new db.Schema({
-   category_id: {type: db.Types.ObjectId, required: true, ref: "categories"},
+   category_id: {type: db.Types.ObjectId, required: true},
    price: {type: Number, required: true},
    amount: {type: Number, required: true}
 })
