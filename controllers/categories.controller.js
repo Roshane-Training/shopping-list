@@ -1,5 +1,6 @@
 const categoriesModel = require('../models/categories.model')
 const { JSONResponse } = require('../lib/helper')
+const itemsModel = require('../models/items.model')
 
 class CategoriesController {
 	/**
@@ -78,27 +79,36 @@ class CategoriesController {
 	static updateCategory(req, res) {
 		let body = req.body
 		let id = req.params.id
-		categoriesModel
-			.findByIdAndUpdate(id, body)
-			.then((result) => {
-				if (result)
-					JSONResponse.success(res, 'Success.', result, 200)
-				else
+		categoriesModel.findById(id).then((result) => {
+			categoriesModel.findByIdAndUpdate(id, body)
+				.then((result) => {
+					if (result) {
+						itemsModel
+							.updateMany(
+								{ category: result.name },
+								{ category: body.name }
+							)
+							.exec()
+						JSONResponse.success(res, 'Success.', result, 200)
+					} else
+						JSONResponse.error(
+							res,
+							'Failure updating category.',
+							new Error(
+								'Document not successfully updated, assess model.'
+							),
+							409
+						)
+				})
+				.catch((error) => {
 					JSONResponse.error(
 						res,
-						'Failure updating category.',
-						new Error('Document not successfully updated, assess model.'),
-						409
+						'Fatal error accessing database.',
+						error,
+						500
 					)
-			})
-			.catch((error) => {
-				JSONResponse.error(
-					res,
-					'Fatal error accessing database.',
-					error,
-					500
-				)
-			})
+				})
+		})
 	}
 
 	/**
@@ -110,14 +120,15 @@ class CategoriesController {
 		categoriesModel
 			.findByIdAndDelete(id)
 			.then((result) => {
-				if (result)
+				if (result) {
+					itemsModel.deleteMany({ category: result.name }).exec()
 					JSONResponse.success(
 						res,
 						'Successfully deleted category.',
 						result,
 						200
 					)
-				else
+				} else
 					JSONResponse.error(
 						res,
 						'Failure deleting category.',
@@ -128,7 +139,6 @@ class CategoriesController {
 			.catch((error) => {
 				JSONResponse.error(res, 'Failure deleting category.', error, 500)
 			})
-		JSONResponse.success(res, 'Success.', category, 200)
 	}
 }
 
