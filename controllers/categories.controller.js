@@ -46,7 +46,7 @@ class CategoriesController {
 		new categoriesModel(body)
 			.save()
 			.then((result) => {
-				if (result.length > 0)
+				if (result)
 					JSONResponse.success(
 						res,
 						'Success creating category.',
@@ -114,7 +114,7 @@ class CategoriesController {
 					JSONResponse.success(
 						res,
 						'Successfully deleted category.',
-						results,
+						result,
 						200
 					)
 				else

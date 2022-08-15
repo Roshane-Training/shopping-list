@@ -20,8 +20,8 @@ exports.getAllItems = async (req, res) => {
  */
 exports.createItem = async (req, res) => {
 	try {
-		const items = await Items.create(req.body)
-		JSONResponse.success(res, 'Success.', items, 200)
+		const item = await Items.create(req.body)
+		JSONResponse.success(res, 'Success.', item, 200)
 	} catch (error) {
 		JSONResponse.error(res, 'Failure handling item model.', error, 500)
 	}
@@ -37,7 +37,7 @@ exports.updateItem = async (req, res) => {
 	try {
 		Items.findByIdAndUpdate(id, body)
 			.then((result) => {
-				if (result) JSONResponse.success(res, 'Success.', results[0], 200)
+				if (result) JSONResponse.success(res, 'Success.', result, 200)
 				else
 					JSONResponse.error(
 						res,
@@ -50,7 +50,7 @@ exports.updateItem = async (req, res) => {
 				JSONResponse.error(
 					res,
 					'Fatal error accessing database.',
-					error,
+					error.message,
 					500
 				)
 			})
