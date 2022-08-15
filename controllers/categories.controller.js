@@ -45,12 +45,12 @@ class CategoriesController {
 		let body = req.body
 		new categoriesModel(body)
 			.save()
-			.then((results) => {
-				if (results.length > 0)
+			.then((result) => {
+				if (result.length > 0)
 					JSONResponse.success(
 						res,
 						'Success creating category.',
-						results,
+						result,
 						200
 					)
 				else
@@ -79,15 +79,14 @@ class CategoriesController {
 		let body = req.body
 		let id = req.params.id
 		categoriesModel
-			.findById(id)
-			.update(body)
-			.then((results) => {
-				if (results.length > 0)
-					JSONResponse.success(res, 'Success.', results[0], 200)
+			.findByIdAndUpdate(id, body)
+			.then((result) => {
+				if (result)
+					JSONResponse.success(res, 'Success.', result, 200)
 				else
 					JSONResponse.error(
 						res,
-						'Failure creating category.',
+						'Failure updating category.',
 						new Error('Document not successfully updated, assess model.'),
 						409
 					)
@@ -109,14 +108,13 @@ class CategoriesController {
 	static deleteCategory(req, res) {
 		let id = req.params.id
 		categoriesModel
-			.findById(id)
-			.delete()
-			.then((results) => {
-				if (results)
+			.findByIdAndDelete(id)
+			.then((result) => {
+				if (result)
 					JSONResponse.success(
 						res,
 						'Successfully deleted category.',
-						results[0],
+						results,
 						200
 					)
 				else

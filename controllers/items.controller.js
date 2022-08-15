@@ -35,16 +35,13 @@ exports.updateItem = async (req, res) => {
 	let body = req.body
 	let id = req.params.id
 	try {
-		const item = await Items.findById(id)
-		item
-			.update(body)
-			.then((results) => {
-				if (results.length > 0)
-					JSONResponse.success(res, 'Success.', results[0], 200)
+		Items.findByIdAndUpdate(id, body)
+			.then((result) => {
+				if (result) JSONResponse.success(res, 'Success.', results[0], 200)
 				else
 					JSONResponse.error(
 						res,
-						'Failure creating category.',
+						'Failure updating item.',
 						new Error('Document not successfully updated, assess model.'),
 						409
 					)
