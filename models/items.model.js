@@ -7,4 +7,7 @@ let itemsSchema = new db.Schema({
 	quantity: { type: Number, required: true },
 })
 
+/**
+ * ### Item Model
+ */
 module.exports = db.model('items', itemsSchema)

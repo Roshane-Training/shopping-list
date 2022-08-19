@@ -5,7 +5,7 @@ const itemsModel = require('../models/items.model')
 class CategoriesController {
 	/**
 	 * ### Description
-	 * Get all items
+	 * Get all categories
 	 */
 	static getAllCategories(req, res) {
 		categoriesModel

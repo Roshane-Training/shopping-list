@@ -1,7 +1,10 @@
 const db = require('mongoose')
 
-let itemsSchema = new db.Schema({
+let categorySchema = new db.Schema({
 	name: { type: String, required: true }
 })
 
-module.exports = db.model('categories', itemsSchema)
+/**
+ * ### Categories Model
+ */
+module.exports = db.model('categories', categorySchema)
