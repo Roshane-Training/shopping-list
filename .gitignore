@@ -40,12 +40,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-
-# Environment Files
-.env
-.env.test
-.env.backup
-
-# Heroku
-procfile
