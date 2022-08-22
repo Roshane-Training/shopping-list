@@ -47,3 +47,5 @@ Thumbs.db
 .env.test
 .env.backup
 
+# Heroku
+procfile
