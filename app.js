@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const { MongoClient, ServerApiVersion } = require('mongodb')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
@@ -17,12 +18,13 @@ const indexRouter = require('./routes/index.routes')
 app.use('/', indexRouter)
 
 // Start Express App
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err) => {
-	if (err) throw err
+mongoose.connect(process.env.MONGODB_URI, (err) => {
+	if (err) console.error(err)
+	else {
+		console.log('MongoDB Connected')
 
-	console.log('MongoDB Connected')
-
-	app.listen(PORT, () => {
-		console.log(`Server listening on http://localhost:${PORT}`)
-	})
+		app.listen(PORT, () => {
+			console.log(`Server listening on http://localhost:${PORT}`)
+		})
+	}
 })
